@@ -21,7 +21,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/hotels")
+@RequestMapping({"api/v1/hotels", ""})
 public class HotelController {
     private final HotelService hotelService;
 
