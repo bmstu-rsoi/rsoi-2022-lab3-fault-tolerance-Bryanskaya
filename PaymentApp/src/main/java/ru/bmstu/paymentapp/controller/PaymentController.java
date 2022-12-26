@@ -18,6 +18,13 @@ import java.util.UUID;
 public class PaymentController {
     private final PaymentService paymentService;
 
+    @GetMapping(value = "/manage/health", produces = "application/json")
+    public ResponseEntity<?> isAlive() {
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
     @GetMapping(value = "/{paymentUid}", produces = "application/json")
     public ResponseEntity<?> getPaymentByUid(@PathVariable UUID paymentUid) {
         log.info(">>> PAYMENT: Request to get payment by paymentUid={} was caught.", paymentUid);

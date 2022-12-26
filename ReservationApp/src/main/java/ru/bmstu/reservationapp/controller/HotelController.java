@@ -25,6 +25,13 @@ import java.util.UUID;
 public class HotelController {
     private final HotelService hotelService;
 
+    @GetMapping(value = "/manage/health", produces = "application/json")
+    public ResponseEntity<?> isAlive() {
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
     @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<PaginationResponse> getHotels(@PathParam(value = "page") Integer page,
                                                      @PathParam(value = "size") Integer size) {
@@ -48,6 +55,14 @@ public class HotelController {
                 .body(hotelService.getHotelByHotelId(hotelId));
     }
 
+    @GetMapping(value = "/exists/{hotelUid}", produces = "application/json")
+    public ResponseEntity<HotelResponse> getHotelByUid(@PathVariable UUID hotelUid) {
+        log.info(">>> RESERVATION: Request to get hotel by hotelUid={} was caught.", hotelUid);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(hotelService.getHotelByHotelUid(hotelUid));
+    }
 
     @GetMapping(value = "/{hotelUid}/id", produces = "application/json")
     public ResponseEntity<?> getHotelIdByHotelUid(@PathVariable UUID hotelUid) {

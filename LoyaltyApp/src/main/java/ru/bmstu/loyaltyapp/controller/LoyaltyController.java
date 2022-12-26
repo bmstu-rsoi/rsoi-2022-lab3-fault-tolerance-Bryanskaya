@@ -19,6 +19,13 @@ import javax.websocket.server.PathParam;
 public class LoyaltyController {
     private final LoyaltyService loyaltyService;
 
+    @GetMapping(value = "/manage/health", produces = "application/json")
+    public ResponseEntity<?> isAlive() {
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
     @GetMapping(produces = "application/json")
     public ResponseEntity<?> getDiscountByUsername(@RequestHeader(value = "X-User-Name") String username) {
         log.info(">>> LOYALTY: Request to get username's={} loyalty status was caught.", username);
