@@ -16,3 +16,22 @@ port:
     hotel: "8070"
     loyalty: "8050"
     payment: "8060"
+
+resilience4j:
+  circuit-breaker:
+    instances:
+      gateway-hotels:
+        minimum-number-of-calls: 2
+        wait-duration-in-open-state: 30s
+      gateway-loyalty:
+        minimum-number-of-calls: 2
+        wait-duration-in-open-state: 30s
+      gateway-reservation:
+        minimum-number-of-calls: 2
+        wait-duration-in-open-state: 30s
+      gateway-payment:
+        minimum-number-of-calls: 2
+        wait-duration-in-open-state: 30s
+
+schedule:
+  fixedRate.in.milliseconds: 10_000
